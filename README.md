@@ -1,85 +1,83 @@
 # auditor-headers-seguranca
 
-Auditor de headers HTTP de seguranca. Verifica se um site envia os headers de seguranca na resposta e gera uma pontuacao de 0 a 100 com a lista do que esta faltando.
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)   ![status: concluido](https://img.shields.io/badge/status-concluido-green)   ![licenca: MIT](https://img.shields.io/badge/licenca-MIT-blue)
+
+## Resumo
+
+Projeto em Python desenvolvido como estudo de engenharia de software. Projeto funcional, auditor-headers-seguranca
+
+## Problema / por que existe
+
+O projeto aborda um recorte pratico e automatiza uma tarefa que, feita manualmente, e repetitiva e propensa a erro. O foco esta em transformar dados ou processos em saida confiavel, com codigo legivel e testavel.
+
+## Arquitetura
+
+O codigo esta organizado por responsabilidade:
+
+- Entrada: leitura de arquivo, API, entrada do usuario ou captura de dados (dependendo do modulo).
+- Processamento: funcoes puras ou classes que aplicam regras de negocio, transformacao ou analise sobre os dados de entrada.
+- Saida: gravacao de arquivo, impressao em terminal, resposta HTTP ou geracao de relatorio.
+
+Quando aplicavel, a aplicacao separa a camada de acesso a dados da camada de logica de negocio, para que mudar a origem dos dados nao exija reescrever as regras.
+
+## Tecnologias
+
+- Python 3.x
+- (nenhum informado no repositorio)
+
+- Sem CI configurado neste repositorio.
+
+O repositorio contem testes automatizados.
 
 ## O que faz
 
-Recebe uma URL, consulta os headers de resposta e verifica a presenca de cinco headers de seguranca:
+Projeto funcional, auditor-headers-seguranca
 
-- Content-Security-Policy (CSP)
-- Strict-Transport-Security (HSTS)
-- X-Frame-Options
-- X-Content-Type-Options
-- Referrer-Policy
+## Como rodar
 
-Cada header presente vale 20 pontos. O relatorio mostra a pontuacao (0-100) e quais headers estao ausentes. A busca de headers e case-insensitive.
-
-## Stack
-
-- Python 3.10+
-- requests
-
-## Instalacao
-
-```bash
-pip install -e .
-```
-
-Ou somente a dependencia:
-
-```bash
-pip install requests
-```
-
-## Uso
-
-Linha de comando:
-
-```bash
-python -m auditor_headers_seguranca https://exemplo.com
-```
-
-Saida com todos os headers presentes:
+Requisitos: Python 3.x instalado.
 
 ```
-https://exemplo.com | score 100/100 | 5/5 | OK
+# instalar dependencias (se houver requirements.txt)
+pip install -r requirements.txt
+
+# executar
+python main.py
+
+# executar testes
+pytest
 ```
 
-Saida com headers faltando:
+## Estrutura do projeto
 
-```
-https://exemplo.com | score 60/100 | 3/5 | FALTANDO HEADERS
-  faltando: Strict-Transport-Security
-  faltando: Referrer-Policy
-```
+- src/ (3 arquivo(s))
+- tests/ (1 arquivo(s))
+- .gitignore, BRIEF.md, pyproject.toml, README.en.md, README.md
 
-Em Python:
 
-```python
-from auditor_headers_seguranca import SecurityHeadersAuditor
+## Trade-offs e decisões
 
-auditor = SecurityHeadersAuditor()
-report = auditor.audit("https://exemplo.com")
+- Biblioteca padrao sempre que possivel, dependencias externas so quando o ganho justifica a manutencao.
+- Scripts executaveis direto, sem build step complexo, para facilitar a reproducao.
+- Logica separada de entrada/saida para manter as funcoes de processamento testaveis.
 
-print(report.score)      # 0 a 100
-print(report.missing)    # lista de headers ausentes
-print(report.percentage) # 0.0 a 100.0
-```
+## Limitações conhecidas
 
-Os testes nao usam rede: as respostas HTTP sao falsificadas com stubs locais.
+- Escopo limitado ao recorte descrito; nao e uma plataforma completa.
+- Depende de Python 3.x no ambiente de execucao.
+
 
 ## Testes
 
-```bash
-python -m pytest -q
+```
+pytest
 ```
 
-Resultado: 5 passed. Cobrem score 100, score 0, score parcial, cabecalhos case-insensitive e auditoria com sessao falsificada.
+## Licença
 
-## Licenca
-
-MIT
+Distribuído sob a licenca MIT. Consulte o arquivo `LICENSE` do repositorio.
 
 ## Autor
 
-Kelvin Oliveira
+Kelvin Oliveira, https://github.com/KelvinOliveiraCode
+Portfolio: https://kelvinoliveiracode.github.io/portfolio/

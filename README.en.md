@@ -1,85 +1,84 @@
+
 # auditor-headers-seguranca
 
-Security HTTP headers auditor. Checks whether a site sends security headers in the response and generates a score from 0 to 100 with the list of what is missing.
+![language: Python](https://img.shields.io/badge/language-Python-blue?logo=python)   ![status: done](https://img.shields.io/badge/status-done-green)   ![license: MIT](https://img.shields.io/badge/license-MIT-blue)
+
+## Summary
+
+Python project developed as a software engineering study. Projeto funcional, auditor-headers-seguranca
+
+## Problem / why it exists
+
+The project addresses a practical scope and automates a task that, done manually, is repetitive and error-prone. The focus is on turning data or processes into reliable output, with readable and testable code.
+
+## Architecture
+
+The code is organized by responsibility:
+
+- Input: reading a file, API, user input or data capture (depending on the module).
+- Processing: pure functions or classes that apply business rules, transformation or analysis over the input data.
+- Output: writing a file, printing to terminal, HTTP response or report generation.
+
+When applicable, the application separates the data access layer from the business logic layer, so changing the data source does not require rewriting the rules.
+
+## Technologies
+
+- Python 3.x
+- (none declared in the repository)
+
+- No CI configured in this repository.
+
+The repository contains automated tests.
 
 ## What it does
 
-Receives a URL, queries the response headers and checks the presence of five security headers:
+Projeto funcional, auditor-headers-seguranca
 
-- Content-Security-Policy (CSP)
-- Strict-Transport-Security (HSTS)
-- X-Frame-Options
-- X-Content-Type-Options
-- Referrer-Policy
+## How to run
 
-Each present header is worth 20 points. The report shows a score (0-100) and which headers are missing. Header lookup is case-insensitive.
-
-## Stack
-
-- Python 3.10+
-- requests
-
-## Install
-
-```bash
-pip install -e .
-```
-
-Or just the dependency:
-
-```bash
-pip install requests
-```
-
-## Usage
-
-Command line:
-
-```bash
-python -m auditor_headers_seguranca https://example.com
-```
-
-Output with all headers present:
+Requirements: Python 3.x installed.
 
 ```
-https://example.com | score 100/100 | 5/5 | OK
+# install dependencies (if requirements.txt exists)
+pip install -r requirements.txt
+
+# run
+python main.py
+
+# run tests
+pytest
 ```
 
-Output with missing headers:
+## Project structure
 
-```
-https://example.com | score 60/100 | 3/5 | MISSING HEADERS
-  missing: Strict-Transport-Security
-  missing: Referrer-Policy
-```
+- src/ (3 arquivo(s))
+- tests/ (1 arquivo(s))
+- .gitignore, BRIEF.md, pyproject.toml, README.en.md, README.md
 
-In Python:
 
-```python
-from auditor_headers_seguranca import SecurityHeadersAuditor
+## Trade-offs and decisions
 
-auditor = SecurityHeadersAuditor()
-report = auditor.audit("https://example.com")
+- Standard library whenever possible; external dependencies only when the benefit justifies maintenance.
+- Executable scripts straight away, no complex build step, to ease reproduction.
+- Logic separated from input/output to keep processing functions testable.
 
-print(report.score)      # 0 to 100
-print(report.missing)    # list of missing headers
-print(report.percentage) # 0.0 to 100.0
-```
+## Known limitations
 
-Tests do not use the network: HTTP responses are faked with local stubs.
+- Limited scope to the described slice; it is not a complete platform.
+- Depends on Python 3.x at runtime.
+
 
 ## Tests
 
-```bash
-python -m pytest -q
 ```
-
-Result: 5 passed. Covers score 100, score 0, partial score, case-insensitive headers and audit with a faked session.
+pytest
+```
 
 ## License
 
-MIT
+Distributed under the MIT License. See the `LICENSE` file in this repository.
 
 ## Author
 
-Kelvin Oliveira
+Kelvin Oliveira, https://github.com/KelvinOliveiraCode
+Portfolio: https://kelvinoliveiracode.github.io/portfolio/
